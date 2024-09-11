@@ -1,0 +1,192 @@
+package FLAMes;
+import java.util.*;
+
+
+public class flame {
+	//There is only one class here, thus it doesn't really matter if functions are private or not.
+	private static String a,b;
+	//declare names
+	private static int grab,crab, blab, krab,rem;
+	//for counting number of non common letters(intersection of alphabets) 
+	
+	//Function to check the validity of name
+	public static void check(String a) {
+		a=a.replaceAll(" ","");
+		//replace spaces
+		for(Character i:a.toCharArray()) {
+			//Checks if user's name is null or has special characters or has mistakenly input the other's name as their own and vice versa 
+		if(a.isEmpty() || ! Character.isLetter(i) ) {
+			System.out.println("invalid name");
+			grab++;
+			
+		}
+	}
+		if(grab!=0) {
+			System.out.println("Please enter your correct name");
+			grab=0;
+			blab=0;
+		}
+		else {
+			blab=1;
+		}
+		
+	
+	}
+	//repeat
+	public static void check_(String b) {
+		b=b.replaceAll(" ","");
+		for(Character i:b.toCharArray()) {
+		if(b.isEmpty() || ! Character.isLetter(i)|| b.equals(a) ) {
+			System.out.println("invalid name of partner");
+			crab++;
+			
+		}
+	}
+		if(crab!=0) {
+			System.out.println("Please enter your correct name");
+			crab=0;
+			krab=0;
+		}
+		else {
+			krab=1;
+		}
+		
+	
+	}
+		
+	
+	//creation of function that allows the user to input the names and checks if the names are valid.
+	private static void initialize() {
+		
+		
+			
+			while(true)//loop that keeps asking for user's name if it breaches condition in check() 
+				{
+			System.out.println("Please enter your name:");
+			Scanner s= new Scanner(System.in);
+			//self explanatory
+			a=s.nextLine();
+			
+			//To input name inside the variable a
+			
+			check(a);//recursion 😎
+			if(blab==0) {
+				System.out.println("Name must not contain special characters");
+				
+			}
+			else {
+				break;
+				}
+				}
+			
+			
+			
+	
+			//creation of a loop that keeps asking for name over and over again if it breaches condition
+	while(true) {
+		System.out.println("Please enter partner's name:");
+		//self explanatory
+		Scanner m= new Scanner(System.in);
+		b=m.nextLine();
+		
+		//To input name inside the variable a
+		
+		check_(b);//recursion again 🤙
+		if(krab==0) {
+			System.out.println("Partner's name must not contain special characters");
+			
+		}
+		else {
+			break;
+			}
+		
+		
+		}
+				
+	}
+
+			
+		
+		
+		
+			
+
+	//end of initialization
+	//Function that does the manual labour of creating two strings with no common characters
+	public static void run() {
+		
+		a=a.toLowerCase();
+		//conversion to lowercase
+		
+		//repeat
+		b=b.toLowerCase();
+		
+		//local variables to hold the unique characters
+		String x="",y="";
+			
+			//arrays that store individual characters as strings
+	        String[] h = a.split("");
+	        String[] j = b.split("");
+	        
+	        //conversion to arraylist
+	        ArrayList<String> u = new ArrayList<>(Arrays.asList(h));
+	        ArrayList<String> v = new ArrayList<>(Arrays.asList(j));
+	        
+	        //creation of arraylist to store the unique characters
+	        ArrayList<String> z = new ArrayList<>();
+	        
+	        //nested if statement to check if a character(actually a string) is common
+	        for (String k : new ArrayList<>(u)) {
+	            if (v.contains(k)) {
+	                z.add(k);
+	                u.remove(k);
+	                v.remove(k);
+	            }
+	        }
+	        for (String m : u) {
+	            x += m;
+	            //adds to arraylist
+	        }
+	        for (String n : v) {
+	            y += n;
+	            //repeat
+	        }
+	        //obtaining final remainder
+		 rem=x.length()+y.length();
+	}
+	//Performs the final assignment
+	public static void conclude() {
+		rem%=5;
+		//obvious
+		if(rem==1) {
+			System.out.println(a+" and "+b+" will be friends");
+		}
+		else if(rem==2) {
+			System.out.println(a+" and "+b+" will be lovers");
+		}
+		else if(rem==3) {
+			System.out.println(a+" and "+b+" will be affectionate");
+		}
+		else if(rem==4) {
+			System.out.println(a+" and "+b+" will be married");
+		}
+		else if(rem==0) {
+			System.out.println(a+" and "+b+" will be enemies");
+		}
+		
+	}
+	
+	
+		
+	
+	//finally calling the functions
+	public static void main(String[] args) {
+		initialize();
+		//Check() and Check_() undergo recursion so no need to call them😉
+		run();
+		conclude();
+	
+	}
+	
+
+}
